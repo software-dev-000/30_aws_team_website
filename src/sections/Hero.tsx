@@ -1,7 +1,52 @@
 import React from 'react';
 import { ChevronDown, Server, Cloud, Database, Code } from 'lucide-react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 const Hero = () => {
+  const codeString = `# AWS Infrastructure as Code
+resource "aws_eks_cluster" "buildops_cluster" {
+  name     = "buildops-cluster"
+  role_arn = aws_iam_role.eks_cluster_role.arn
+
+  vpc_config {
+    subnet_ids = module.vpc.private_subnets
+  }
+
+  # Enable EKS Control Plane Logging
+  enabled_cluster_log_types = [
+    "api",
+    "audit",
+    "authenticator",
+    "controllerManager",
+    "scheduler"
+  ]
+}
+
+# CI/CD Pipeline
+pipeline {
+  agent {
+    kubernetes {
+      yaml """
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: buildops-ci
+            image: buildops/ci:latest
+            command: ['cat']
+            tty: true
+      """
+    }
+  }
+
+  stages {
+    stage('Build') { ... }
+    stage('Test') { ... }
+    stage('Deploy') { ... }
+  }
+}`;
+
   return (
     <section 
       id="home" 
@@ -44,55 +89,15 @@ const Hero = () => {
               </a>
             </div>
           </div>
-          <div className="relative animate-fade-in hidden lg:block">
+          <div className="relative animate-fade-in hidden lg:block z-10">
             <div className="relative w-full h-96 glass-effect rounded-xl p-6 shadow-xl">
-              <pre className="text-blue-200 font-mono text-sm overflow-hidden h-full">
-                <code>
-{`# AWS Infrastructure as Code
-resource "aws_eks_cluster" "buildops_cluster" {
-  name     = "buildops-cluster"
-  role_arn = aws_iam_role.eks_cluster_role.arn
-  
-  vpc_config {
-    subnet_ids = module.vpc.private_subnets
-  }
-  
-  # Enable EKS Control Plane Logging
-  enabled_cluster_log_types = [
-    "api",
-    "audit",
-    "authenticator",
-    "controllerManager",
-    "scheduler"
-  ]
-}
-
-# CI/CD Pipeline
-pipeline {
-  agent {
-    kubernetes {
-      yaml """
-        apiVersion: v1
-        kind: Pod
-        spec:
-          containers:
-          - name: buildops-ci
-            image: buildops/ci:latest
-            command: ['cat']
-            tty: true
-      """
-    }
-  }
-  
-  stages {
-    stage('Build') { ... }
-    stage('Test') { ... }
-    stage('Deploy') { ... }
-  }
-}`}
-                </code>
-              </pre>
+              <div className="text-blue-200 font-mono text-sm overflow-hidden h-full rounded-xl">
+              <SyntaxHighlighter language="javascript" style={vscDarkPlus} customStyle={{ borderRadius: '1rem', fontSize: '0.95rem', padding: '1.5rem' }}>
+                {codeString}
+              </SyntaxHighlighter>
+              </div>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary-900/80 rounded-xl"></div>
+              
             </div>
           </div>
         </div>

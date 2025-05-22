@@ -1,14 +1,19 @@
 import React from 'react';
-import { Server, Code } from 'lucide-react';
 
-interface LogoProps {
-  isScrolled: boolean;
-}
 
-const Logo: React.FC<LogoProps> = ({ isScrolled }) => {
+
+const Logo: React.FC<{isScrolled: boolean}> = ({ isScrolled }) => {
   return (
-    <a href="#home" className="flex items-center">
-      <div className="flex items-center mr-2">
+    <a href="/" className="flex items-center">
+      <img src="img/logo/favicon.png" alt="Logo" className="h-[50px]" />
+      <span 
+        className={`ml-2 font-bold text-xl ${
+          isScrolled ? 'text-gray-900' : 'text-white'
+        }`}
+      >
+        BuildOps
+      </span>
+      {/* <div className="flex items-center mr-2">
         <Server 
           className={`w-6 h-6 ${isScrolled ? 'text-primary-600' : 'text-white'}`} 
         />
@@ -22,7 +27,7 @@ const Logo: React.FC<LogoProps> = ({ isScrolled }) => {
         }`}
       >
         Build<span className="text-primary-600">Ops</span>.tech
-      </span>
+      </span> */}
     </a>
   );
 };

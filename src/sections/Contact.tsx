@@ -87,7 +87,7 @@ const Contact = () => {
             />
           </div>
           
-          <div className="p-6 rounded-lg glass-effect backdrop-blur-md border border-white/20">
+          <div className="p-6 rounded-lg glass-effect bg-blue-700 backdrop-blur-md border border-white/20">
             <h4 className="font-bold mb-2">Office Hours</h4>
             <p className="text-blue-100 mb-4">We're available to answer your questions and provide support during our business hours:</p>
             <ul className="space-y-2 text-sm">

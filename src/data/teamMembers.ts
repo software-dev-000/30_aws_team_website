@@ -3,7 +3,7 @@ export const teamMembers = [
     id: 1,
     name: 'Michael Chen',
     position: 'Lead DevOps Engineer',
-    image: 'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    image: 'img/member/member1.png',
     bio: 'Michael is a certified AWS DevOps Engineer with over 10 years of experience in cloud infrastructure, CI/CD pipelines, and container orchestration. He specializes in designing and implementing highly scalable and resilient systems using AWS services.',
     skills: ['AWS', 'Kubernetes', 'Terraform', 'Docker', 'Jenkins', 'GitOps', 'Python', 'Go'],
     rating: 5,
